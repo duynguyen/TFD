@@ -1,6 +1,12 @@
 
-<div class="dashboard-view full-width">
+<div class="device-view full-width">
   <div class="card bgc-blue-100 p+">
-    <p>Devices</p>
+    <p ng-show="::vm.devices.length">1 device connected</p>
+    <p ng-hide="::vm.devices.length">No devices connected</p>
+  </div>
+  <div ng-repeat="device in devices" class="card"><i class="icon icon--xl icon--flat mdi mdi-tablet-ios"></i>
+    <p class="name">{{::device.model}}</p>
+    <p class="name">{{::device.id}}</p>
+    <p class="name">{{::device.timestamp}}</p>
   </div>
 </div>

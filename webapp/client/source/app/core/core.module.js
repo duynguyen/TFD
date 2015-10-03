@@ -4,6 +4,7 @@
     angular
         .module('app.core', [
             'app.helper', 'ngAnimate', 'ngMessages',
-            'ui.router', 'angular-loading-bar', 'lumx', 'ngWebSocket'
+            'ui.router', 'angular-loading-bar', 'lumx', 'ngWebSocket',
+            'angularMoment'
         ]);
 })();

@@ -1,3 +1,10 @@
-.dashboard-view.full-width
+.device-view.full-width
     .card.bgc-blue-100(class="p+")
-        p Devices
+        p(ng-show="::vm.devices.length") 1 device connected
+        p(ng-hide="::vm.devices.length") No devices connected
+
+    .card(ng-repeat="device in devices")
+        i.icon.icon--xl.icon--flat.mdi.mdi-tablet-ios
+        p.name {{::device.model}}
+        p.name {{::device.id}}
+        p.name {{::device.timestamp}}

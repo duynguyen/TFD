@@ -10,11 +10,15 @@
     function DeviceController (wsAPI) {
         var vm = this;
 
+        vm.devices = wsAPI.getDevices();
+        console.log(vm.devices);
+
         init();
 
         //////////////
 
         function init () {
+
         }
     }
 })();

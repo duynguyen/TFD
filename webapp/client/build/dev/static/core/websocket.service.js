@@ -13,17 +13,49 @@
     /* @ngInject */
 
     function wsService ($http, $q, $timeout, $rootScope, Event, ajaxError, $websocket) {
-        var collection = [];
-        var connected = false;
+        var connected = false,
+            devicesArr = [],
+            aliveArr = [],
+            sbsArr = [],
+            sidsArr = [],
+            sensorArr = [];
 
         var methods = {
-            collection: collection,
-            connected: connected
+            isConnected: isConnected,
+            getDevices: getDevices,
+            getAlive: getAlive,
+            getSBS: getSBS,
+            getSIDS: getSIDS,
+            getSensors: getSensors
         };
 
         init();
 
         return methods;
+
+        function isConnected () {
+            return connected;
+        }
+
+        function getDevices () {
+            return devicesArr;
+        }
+
+        function getAlive () {
+            return aliveArr;
+        }
+
+        function getSBS () {
+            return sbsArr;
+        }
+
+        function getSIDS () {
+            return sidsArr;
+        }
+
+        function getSensors () {
+            return sensorArr;
+        }
 
         function init () {
             connectWS();
@@ -33,17 +65,35 @@
             console.log('connecting to websocket...');
             var dataStream = $websocket ('ws://hacktag15.mybluemix.net/ws/baby');
             dataStream.onMessage(function (message) {
-                console.log(JSON.parse(message.data));
-                collection.push(JSON.parse(message.data));
+                var json = JSON.parse(message.data);
+                if (json.raw) { // device data, sensor data
+                    var device = {
+                        id: json.raw.deviceId,
+                        model: 'CC2650',
+                        updated: json.timestamp
+                    };
+                    devicesArr = [device];
+                    var sensor = json.raw.payload.d;
+                    sensor.updated = json.timestamp;
+                    sensorArr.push(sensor);
+                } else if (json.alive) {
+                    var alive = {
+                        timestamp: json.timestamp,
+                        alive: json.alive
+                    };
+                    aliveArr.push(alive);
+                } else if (json.sbs) { // shoken
+                    console.log(json.sbs);
+                } else if (json.sids) { // sudden infant death
+                    console.log(json.sids);
+                }
             });
             dataStream.onOpen(function () {
                 connected = true;
-                collection.push('open');
                 console.log('open');
             });
             dataStream.onClose(function () {
                 connected = false;
-                collection.push('closed');
                 console.log('closed');
                 reconnectWS();
             });

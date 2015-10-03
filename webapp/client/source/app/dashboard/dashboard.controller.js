@@ -5,12 +5,19 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['wsAPI'];
+    DashboardController.$inject = ['$scope', 'wsAPI'];
     /* @ngInject */
-    function DashboardController (wsAPI) {
+    function DashboardController ($scope, wsAPI) {
         var vm = this;
 
-        vm.messages = wsAPI.collection;
+        $scope.$watch('wsAPI.sids', function (newValue, oldValue) {
+            console.log(newValue);
+            if (oldValue !== newValue) {
+                vm.messages = newValue;
+            }
+        });
+
+        vm.messages = wsAPI.sids;
 
         vm.colors = [
             'bgc-indigo-500',
