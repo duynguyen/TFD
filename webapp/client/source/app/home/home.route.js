@@ -20,7 +20,8 @@
                     url: '/',
                     views: {
                         'main@': {
-                            templateUrl: 'static/home/home.html'
+                            templateUrl: 'static/home/home.html',
+                            controller: 'HomeController as vm'
                         },
                         'sidebar@': {},
                         'breadcrumb@': {}
