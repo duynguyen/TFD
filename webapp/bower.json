@@ -1,0 +1,9 @@
+{
+  "name": "tfd",
+  "version": "1.0.0",
+  "dependencies": {
+    "font-awesome": "latest",
+    "animate.css": "latest",
+    "angular": "latest"
+  }
+}
