@@ -6,7 +6,9 @@
         'app.helper',
         'app.layout',
         'app.home',
-        'app.dashboard'
+        'app.dashboard',
+        'app.timeline',
+        'app.device'
     ]);
 
 })();
