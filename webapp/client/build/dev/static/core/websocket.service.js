@@ -16,17 +16,25 @@
         var connected = false,
             devicesArr = [],
             aliveArr = [],
-            sbsArr = [],
             sidsArr = [],
-            sensorArr = [];
+            shokenArr = [],
+            sensorArr = [],
+            climbArr = [],
+            fallingArr = [],
+            sunburnArr = [],
+            feverArr = [];
 
         var methods = {
             isConnected: isConnected,
             getDevices: getDevices,
             getAlive: getAlive,
-            getSBS: getSBS,
             getSIDS: getSIDS,
-            getSensors: getSensors
+            getSensors: getSensors,
+            getShoken: getShoken,
+            getClimb: getClimb,
+            getFalling: getFalling,
+            getSunburn: getSunburn,
+            getFever: getFever
         };
 
         init();
@@ -45,8 +53,8 @@
             return aliveArr;
         }
 
-        function getSBS () {
-            return sbsArr;
+        function getShoken () {
+            return getShoken;
         }
 
         function getSIDS () {
@@ -55,6 +63,22 @@
 
         function getSensors () {
             return sensorArr;
+        }
+
+        function getClimb () {
+            return climbArr;
+        }
+
+        function getFalling () {
+            return fallingArr;
+        }
+
+        function getFever () {
+            return feverArr;
+        }
+
+        function getSunburn () {
+            return sunburnArr;
         }
 
         function init () {
@@ -82,10 +106,37 @@
                         alive: json.alive
                     };
                     aliveArr.push(alive);
-                } else if (json.sbs) { // shoken
-                    console.log(json.sbs);
                 } else if (json.sids) { // sudden infant death
-                    console.log(json.sids);
+                    var sids = json.sids;
+                    sids.timestamp = json.timestamp;
+                    sidsArr.push(sids);
+                } else if (json.sbs) { // shoken
+                    shokenArr.push({
+                        timestamp: json.timestamp,
+                        shoken: json.sbs.shaken
+                    });
+                } else if (json.climbing) {
+                    climbArr.push({
+                        timestamp: json.timestamp,
+                        climbing: json.climbing.climbing
+                    });
+                } else if (json.fall) {
+                    fallingArr.push({
+                        timestamp: json.timestamp,
+                        falling: json.fall.fall
+                    });
+                } else if (json.fever) {
+                    feverArr.push({
+                        timestamp: json.timestamp,
+                        fever: json.fever.fever
+                    });
+                } else if (json.sunburn) {
+                    sunburnArr.push({
+                        timestamp: json.timestamp,
+                        sunburn: json.sunburn.sunburn
+                    });
+                } else {
+                    console.log(json);
                 }
             });
             dataStream.onOpen(function () {

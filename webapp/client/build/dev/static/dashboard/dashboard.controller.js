@@ -10,14 +10,7 @@
     function DashboardController ($scope, wsAPI) {
         var vm = this;
 
-        $scope.$watch('wsAPI.getDevices()', function (newValue, oldValue) {
-            console.log(newValue);
-            if (oldValue !== newValue) {
-                vm.messages = newValue;
-            }
-        });
-
-        vm.messages = wsAPI.getAlive();
+        vm.messages = wsAPI.getSIDS();
 
         vm.colors = [
             'bgc-indigo-500',
