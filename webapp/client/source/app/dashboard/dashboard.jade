@@ -1,11 +1,9 @@
 .dashboard-view.full-width
     .card.bgc-blue-100(class="p+")
-        p Welcome {{vm.userInfo.name}}!
+        p Welcome Papa!
     .boxes
-        a.box.tc-white(ng-repeat="product in ::vm.products",
-            ui-sref="{{::product.link}}",
+        a.box.tc-white(ng-repeat="msg in ::vm.messages",
             class="{{::vm.colors[$index % vm.colors.length]}}"
             )
             i.icon.icon--xl.icon--flat.mdi.mdi-cellphone-android
-            span.count {{::product.count}}
-            p.name {{::product.name}}
+            p.name {{::msg}}

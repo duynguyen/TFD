@@ -32,10 +32,6 @@
                         'breadcrumb': {
                             templateUrl: 'static/layout/breadcrumb.html',
                             controller: 'BreadcrumbController as vm'
-                        },
-                        'footer': {
-                            templateUrl: 'static/layout/footer.html',
-                            controller: 'FooterController as vm'
                         }
                     }
                 }

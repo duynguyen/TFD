@@ -26,8 +26,7 @@
                     },
                     data: {
                         title: 'Dashboard',
-                        _class: 'dashboard',
-                        requireLogin: true
+                        _class: 'dashboard'
                     },
                     sidebar: {
                         icon: 'mdi-view-dashboard',

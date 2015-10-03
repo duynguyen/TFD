@@ -1,8 +1,8 @@
 
 <div class="dashboard-view full-width">
   <div class="card bgc-blue-100 p+">
-    <p>Welcome {{vm.userInfo.name}}!</p>
+    <p>Welcome Papa!</p>
   </div>
-  <div class="boxes"><a ng-repeat="product in ::vm.products" ui-sref="{{::product.link}}" class="box tc-white {{::vm.colors[$index % vm.colors.length]}}"><i class="icon icon--xl icon--flat mdi mdi-cellphone-android"></i><span class="count">{{::product.count}}</span>
-      <p class="name">{{::product.name}}</p></a></div>
+  <div class="boxes"><a ng-repeat="msg in ::vm.messages" class="box tc-white {{::vm.colors[$index % vm.colors.length]}}"><i class="icon icon--xl icon--flat mdi mdi-cellphone-android"></i>
+      <p class="name">{{::msg}}</p></a></div>
 </div>

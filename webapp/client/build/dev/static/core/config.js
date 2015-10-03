@@ -7,7 +7,7 @@
 
     var config = {
         appErrorPrefix: '[Webapp Error] ',
-        appTitle: 'Webapp'
+        appTitle: 'Baby Baby!'
     };
 
     appConfig.$inject = ['routerHelperProvider'];

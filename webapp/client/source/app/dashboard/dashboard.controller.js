@@ -5,10 +5,12 @@
         .module('app.dashboard')
         .controller('DashboardController', DashboardController);
 
-    DashboardController.$inject = ['userAPI'];
+    DashboardController.$inject = ['wsAPI'];
     /* @ngInject */
-    function DashboardController (userAPI) {
+    function DashboardController (wsAPI) {
         var vm = this;
+
+        vm.messages = wsAPI.collection;
 
         vm.colors = [
             'bgc-indigo-500',
@@ -21,18 +23,6 @@
         //////////////
 
         function init () {
-            vm.userInfo = userAPI.getUserInfo();
-            _getProductsSummary();
-        }
-
-        function _getProductsSummary () {
-            userAPI.getProductSummary()
-                .then(function (data) {
-                    vm.products = data;
-                    vm.products.forEach(function (product) {
-                        product.link = 'root.' + product.name;
-                    });
-                });
         }
     }
 })();

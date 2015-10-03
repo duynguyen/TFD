@@ -6,10 +6,7 @@
         'app.helper',
         'app.layout',
         'app.home',
-        'app.login',
-        'app.dashboard',
-        'app.phone',
-        'ngWebSocket'
+        'app.dashboard'
     ]);
 
 })();

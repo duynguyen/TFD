@@ -22,9 +22,9 @@
         };
 
         this.$get = RouterHelper;
-        RouterHelper.$inject = ['$location', '$rootScope', '$state', 'logger', 'resolve'];
+        RouterHelper.$inject = ['$location', '$rootScope', '$state', 'logger'];
         /* @ngInject */
-        function RouterHelper ($location, $rootScope, $state, logger, resolve) {
+        function RouterHelper ($location, $rootScope, $state, logger) {
             var handlingStateChangeError = false;
             var hasOtherwise = false;
             var stateCounts = {
@@ -46,14 +46,6 @@
 
             function configureStates (states, otherwisePath) {
                 states.forEach(function (state) {
-                    // add login check if requireLogin is true
-                    var data = state.config.data;
-                    if (data && data.requireLogin === true) {
-                        state.config.resolve = angular.extend(
-                            state.config.resolve || {},
-                            {'loginResolve': resolve.login}
-                        );
-                    }
                     state.config.resolve =
                         angular.extend(state.config.resolve || {}, config.resolveAlways);
                     $stateProvider.state(state.state, state.config);
@@ -82,16 +74,7 @@
                             (error.data || '') + '. <br/>' + (error.statusText || '') +
                             ': ' + (error.status || '');
                         logger.warning(msg, [toState]);
-                        // handle requireLogin issue
-                        if (error === 'requireLogin') {
-                            $state.prev = {
-                                state: toState.name,
-                                params: toParams
-                            };
-                            $state.go('root.login');
-                        } else {
-                            $state.go('root.home');
-                        }
+                        $state.go('root.home');
                     }
                 );
             }
